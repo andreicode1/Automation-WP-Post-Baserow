@@ -1,0 +1,302 @@
+{
+  "name": "Baserow  + WP",
+  "nodes": [
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "Escreva um título com base nas informações abaixo:\n\nO mundo fitness é um ecossistema vibrante e em constante evolução, que pulsa com a energia de milhões de pessoas em busca de saúde, bem-estar e superação. Longe de ser uma tendência passageira, o fitness se consolidou como um pilar fundamental de um estilo de vida consciente e ativo, permeando desde as academias lotadas até os parques ao ar livre e os lares equipados para o exercício.\n\nEm sua essência, o fitness abrange uma vasta gama de atividades físicas, cada uma com seus próprios benefícios e adeptos. Desde a intensidade do treinamento de força e do HIIT, que desafiam os limites do corpo, até a fluidez e a concentração do yoga e do pilates, que promovem o equilíbrio e a consciência corporal. As modalidades são inúmeras: corrida, natação, ciclismo, dança, artes marciais – um leque de opções para encontrar o movimento que ressoa com cada indivíduo.\n\nNo coração do mundo fitness reside a busca por um corpo mais forte, mais resistente e mais saudável. Mas a jornada vai muito além da estética. A prática regular de exercícios físicos libera endorfinas, os hormônios do prazer, que combatem o estresse e a ansiedade, melhoram o humor e promovem uma sensação geral de bem-estar mental. O sono se torna mais reparador, a disposição aumenta e a autoconfiança floresce a cada meta alcançada.\n\nA nutrição é a engrenagem que impulsiona essa máquina em movimento. Uma alimentação equilibrada, rica em nutrientes essenciais, fornece a energia necessária para os treinos e auxilia na recuperação muscular. A consciência alimentar se torna parte integrante do estilo de vida fitness, com a busca por alimentos frescos, minimamente processados e adequados aos objetivos individuais.\n\nNo entanto, o mundo fitness também enfrenta seus desafios e nuances. A pressão estética e a cultura da comparação nas redes sociais podem, por vezes, obscurecer os reais benefícios da atividade física. A busca por resultados rápidos e milagrosos pode levar a práticas não saudáveis e lesões. É crucial cultivar uma relação positiva com o próprio corpo e focar no processo, celebrando cada pequena vitória ao longo do caminho.\n\nA tecnologia se tornou uma aliada poderosa no universo fitness. Aplicativos de treino, smartwatches e rastreadores de atividade fornecem dados, monitoram o progresso e oferecem orientação personalizada. A comunidade online conecta pessoas com objetivos semelhantes, criando um senso de pertencimento e apoio mútuo.\n\nEm última análise, o mundo fitness é uma jornada individual e contínua. É sobre descobrir o prazer no movimento, desafiar os próprios limites, cuidar do corpo e da mente, e construir hábitos saudáveis que perduram ao longo da vida. É um universo pulsante de energia, dedicação e transformação, onde cada passo, cada repetição e cada escolha consciente nos aproxima de uma versão melhor de nós mesmos.\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        180,
+        0
+      ],
+      "id": "891a5471-cf78-45d6-bc10-3558e8862c42",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "fWCKoZJneiWf27Qs",
+          "name": "OpenAi account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "databaseId": 220020,
+        "tableId": 526812,
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 4193901,
+              "fieldValue": "={{ $json.message.content }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        520,
+        0
+      ],
+      "id": "95c7bf2f-75ee-47ab-858b-0e25e2e711d6",
+      "name": "Salva o título",
+      "credentials": {
+        "baserowApi": {
+          "id": "RkB9gG2LDKdGj6ja",
+          "name": "Baserow account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "databaseId": 220020,
+        "tableId": 526812,
+        "rowId": "={{ $json.id }}"
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        700,
+        0
+      ],
+      "id": "e9b93b4d-a226-4939-843b-e2bb779fabc8",
+      "name": "Consulta",
+      "credentials": {
+        "baserowApi": {
+          "id": "RkB9gG2LDKdGj6ja",
+          "name": "Baserow account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Preciso que mantenha o titulo {{ $json.Titulo }} e crie um artigo em cima do titulo e com as informações abaixo:\n\n\"Escreva um artigo informativo para iniciantes sobre os benefícios do treinamento de força. O artigo deve ter cerca de 500 palavras, usar uma linguagem clara e acessível, incluir exemplos práticos de exercícios e destacar os benefícios para a saúde além da estética. Mencione a importância de procurar orientação profissional antes de iniciar um novo programa de exercícios.\n\nInstagram: @andreimarcelina\n\nPode utilizar emojis nesse artigo\n\nNÃO UTILIZAR * e #"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1060,
+        0
+      ],
+      "id": "7bb4b543-80c8-42c8-b691-a7afe36c9443",
+      "name": "Artigo para postar",
+      "credentials": {
+        "openAiApi": {
+          "id": "4n7F6jvDvx9vaWes",
+          "name": "OpenAi account 4"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "title": "={{ $('OpenAI').item.json.message.content }}",
+        "additionalFields": {
+          "content": "={{ $json.html }}",
+          "status": "draft"
+        }
+      },
+      "type": "n8n-nodes-base.wordpress",
+      "typeVersion": 1,
+      "position": [
+        1620,
+        0
+      ],
+      "id": "d32ec20c-1367-4a31-a76b-af1c8ac5696e",
+      "name": "Wordpress",
+      "credentials": {
+        "wordpressApi": {
+          "id": "4NiPm4uAMNclmoxM",
+          "name": "Wordpress account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "html": "<!DOCTYPE html>\n<html lang=\"pt-br\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>{{ $('OpenAI').item.json.message.content }}</title>\n    <style>\n        body {\n            font-family: arial; /* Fonte padrão */\n        }\n        .titulo-artigo {\n            font-size: 2em;\n            margin-bottom: 15px;\n        }\n        .conteudo-artigo {\n            line-height: 1.6;\n        }\n    </style>\n</head>\n<body>\n    <div id=\"conteudoDoArtigo\" class=\"conteudo-artigo\">\n        <p>{{ $json.message.content }}</p>\n    </div>\n</body>\n</html>\n\n<style>\n.container {\n  background-color: #ffffff;\n  text-align: center;\n  padding: 16px;\n  border-radius: 8px;\n}\n\nh1 {\n  color: #ff6d5a;\n  font-size: 24px;\n  font-weight: bold;\n  padding: 8px;\n}\n\nh2 {\n  color: #909399;\n  font-size: 18px;\n  font-weight: bold;\n  padding: 8px;\n}\n</style>"
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        1440,
+        0
+      ],
+      "id": "e10dd95f-a00d-465d-aab7-e573d981255f",
+      "name": "HTML"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "databaseId": 220020,
+        "tableId": 526812,
+        "rowId": "={{ $json.id }}",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": 4227783,
+              "fieldValue": "={{ $json.Postado }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.baserow",
+      "typeVersion": 1,
+      "position": [
+        860,
+        0
+      ],
+      "id": "296e5bc8-4654-4c6d-ae8a-51831ee9dabd",
+      "name": "Update",
+      "credentials": {
+        "baserowApi": {
+          "id": "RkB9gG2LDKdGj6ja",
+          "name": "Baserow account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 14,
+              "triggerAtMinute": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "74a42fb0-c042-4722-a12b-3263e31e7608",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Salva o título",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salva o título": {
+      "main": [
+        [
+          {
+            "node": "Consulta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consulta": {
+      "main": [
+        [
+          {
+            "node": "Update",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Artigo para postar": {
+      "main": [
+        [
+          {
+            "node": "HTML",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTML": {
+      "main": [
+        [
+          {
+            "node": "Wordpress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update": {
+      "main": [
+        [
+          {
+            "node": "Artigo para postar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wordpress": {
+      "main": [
+        []
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a20a5ab8-aa38-479d-adb9-a2565fc3d973",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e9b0b08fd13d79e389de9ba504056c4886925799da025d5e80021792b8aa1acc"
+  },
+  "id": "wr94AIzwDIpmqm6O",
+  "tags": []
+}
